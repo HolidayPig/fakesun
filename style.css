@@ -344,91 +344,43 @@ button:disabled {
   transform-origin: center;
 }
 
-@media (max-width: 480px) {
-  .wheel-container {
-    width: 250px;
-    height: 250px;
-  }
-  .slice span {
-    font-size: 14px;
-  }
-  
-  /* 按钮文字适配 */
-  .spin-btn {
-    padding: 10px 30px;
-    font-size: 16px;
-  }
-  
-  /* 圆形按钮文字适配 */
-  .progress-text, .refresh-progress-text {
-    font-size: 14px; /* 缩小文字 */
-    transform: rotate(90deg) scale(0.9); /* 适当缩放 */
-  }
-  
-  /* 概率显示适配 */
-  .probability-display {
-    font-size: 16px;
-    padding: 8px 15px;
-    top: 60px;
-  }
-  
-  /* 结果横幅文字适配 */
-  .result-banner {
-    font-size: 18px;
-    padding: 12px 0;
-  }
+.reset-btn,
+.refresh-prob-btn {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border: none;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,.2);
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform .2s;
 }
 
-/* 针对更小的屏幕（如320px宽度）额外优化 */
-@media (max-width: 320px) {
-  .progress-text, .refresh-progress-text {
-    font-size: 12px;
-    transform: rotate(90deg) scale(0.8);
-  }
-  
-  .refresh-prob-btn, .reset-btn {
-    width: 100px;
-    height: 100px;
-  }
-}
-
-/* 移除原有的文本旋转 */
-.progress-text, .refresh-progress-text {
+.reset-btn .btn-label,
+.refresh-prob-btn .btn-label {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 18px;
+  font-size: 14px;
   font-weight: bold;
-  width: 100%;
-  text-align: center;
-  pointer-events: none;
-}
-
-.reset-btn .progress-text {
   color: #e74c3c;
+  white-space: nowrap;
+  pointer-events: none; /* 防止遮挡点击 */
 }
 
-.refresh-prob-btn .refresh-progress-text {
-  color: #9966FF;
-}
-
-/* 确保按钮有相对定位 */
-.reset-btn, .refresh-prob-btn {
-  position: relative;
-}
-
-/* 媒体查询优化小屏幕 */
 @media (max-width: 480px) {
-  .progress-text, .refresh-progress-text {
-    font-size: 14px;
-    padding: 0 5px;
-    box-sizing: border-box;
+  .reset-btn .btn-label,
+  .refresh-prob-btn .btn-label {
+    font-size: 12px;
   }
 }
 
 @media (max-width: 320px) {
-  .progress-text, .refresh-progress-text {
-    font-size: 12px;
+  .reset-btn .btn-label,
+  .refresh-prob-btn .btn-label {
+    font-size: 10px;
   }
 }
