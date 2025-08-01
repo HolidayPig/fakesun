@@ -117,15 +117,6 @@ position: absolute;
     line-height: 1;
 }
 
-@media (max-width: 480px) {
-  .wheel-container {
-    width: 250px;
-    height: 250px;
-  }
-  .slice span {
-    font-size: 14px;
-  }
-}
 
 
 .counter {
@@ -351,4 +342,52 @@ button:disabled {
   fill: #9966FF;
   transform: rotate(90deg);
   transform-origin: center;
+}
+
+@media (max-width: 480px) {
+  .wheel-container {
+    width: 250px;
+    height: 250px;
+  }
+  .slice span {
+    font-size: 14px;
+  }
+  
+  /* 按钮文字适配 */
+  .spin-btn {
+    padding: 10px 30px;
+    font-size: 16px;
+  }
+  
+  /* 圆形按钮文字适配 */
+  .progress-text, .refresh-progress-text {
+    font-size: 14px; /* 缩小文字 */
+    transform: rotate(90deg) scale(0.9); /* 适当缩放 */
+  }
+  
+  /* 概率显示适配 */
+  .probability-display {
+    font-size: 16px;
+    padding: 8px 15px;
+    top: 60px;
+  }
+  
+  /* 结果横幅文字适配 */
+  .result-banner {
+    font-size: 18px;
+    padding: 12px 0;
+  }
+}
+
+/* 针对更小的屏幕（如320px宽度）额外优化 */
+@media (max-width: 320px) {
+  .progress-text, .refresh-progress-text {
+    font-size: 12px;
+    transform: rotate(90deg) scale(0.8);
+  }
+  
+  .refresh-prob-btn, .reset-btn {
+    width: 100px;
+    height: 100px;
+  }
 }
