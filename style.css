@@ -1,0 +1,354 @@
+:root {
+  --prize-colors: #FF6384, #36A2EB, #FFCE56, #4BC0C0, #9966FF, #FF9F40;
+  --pink-light: #ff9ff3;
+  --pink-medium: #fd79a8;
+  --pink-dark: #e84393;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: #f0f2f5;
+    padding-top: 20px; /* 为顶部提示框留出空间 */
+}
+
+.wheel-container {
+  position: relative;
+  width: 300px;
+  height: 300px;
+}
+
+.wheel {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border: 8px solid #d63031;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  transition: transform 4s cubic-bezier(0.2, 0.8, 0.3, 1);
+}
+
+.slice {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-origin: center center;
+}
+
+.slice span {
+position: absolute;
+  top: 50%;
+  left: 50%;
+  /* 优化文本位置计算 */
+  width: 70px;
+  text-align: center;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+  /* 添加防止文本重叠 */
+  white-space: nowrap;
+  overflow: visible;
+}
+
+.pointer {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 50px;
+  background: #e74c3c;
+  clip-path: polygon(50% 100%, 0 0, 100% 0);
+  z-index: 10;
+}
+
+.spin-btn {
+  margin-top: 30px;
+  padding: 12px 40px;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.spin-btn:hover {
+  background: #c0392b;
+  transform: scale(1.05);
+}
+
+.result-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #4CAF50;
+    color: white;
+    padding: 15px 0;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    transform: translateY(-100%);
+    transition: transform 0.4s ease;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.result-banner.show {
+    transform: translateY(0);
+}
+
+.close-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0 10px;
+    line-height: 1;
+}
+
+@media (max-width: 480px) {
+  .wheel-container {
+    width: 250px;
+    height: 250px;
+  }
+  .slice span {
+    font-size: 14px;
+  }
+}
+
+
+.counter {
+  margin-top: 15px;
+  font-size: 16px;
+  color: #6c757d;
+}
+
+/* 新增：特效容器 */
+.special-effect {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9998;
+  display: none;
+  overflow: hidden;
+}
+
+/* 粒子特效 */
+.particle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--pink-light);
+  animation: particleAnimation 2s ease-out forwards;
+}
+
+@keyframes particleAnimation {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: 
+      translate(
+        calc((var(--tx, 0)) * 100px), 
+        calc((var(--ty, 0)) * 100px)
+      ) 
+      scale(0);
+    opacity: 0;
+  }
+}
+
+/* 爱心特效 */
+.heart {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  transform: translate(-50%, -50%);
+   animation: heartPulse 1.2s ease-in-out infinite;
+  
+}
+
+.heart::before,
+.heart::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 52px;
+  height: 80px;
+  border-radius: 50px 50px 0 0;
+  background: var(--pink-medium);
+}
+
+.heart::before {
+  left: 50px;
+  transform: rotate(-45deg);
+  transform-origin: 0 100%;
+}
+
+.heart::after {
+  left: 0;
+  transform: rotate(45deg);
+  transform-origin: 100% 100%;
+}
+@keyframes heartPulse {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  50% { transform: translate(-50%, -50%) scale(1.3); opacity: 0.9; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+@keyframes heartBeat {
+  0% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.2); }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+/* 新增：闪光效果 */
+@keyframes shine {
+  0% { box-shadow: 0 0 5px var(--pink-light); }
+  50% { box-shadow: 0 0 30px var(--pink-medium), 0 0 60px var(--pink-light); }
+  100% { box-shadow: 0 0 5px var(--pink-light); }
+}
+@keyframes wheelGlow {
+  0% { box-shadow: 0 0 10px rgba(255, 99, 132, 0.8); }
+  50% { box-shadow: 0 0 40px rgba(255, 99, 132, 0.9), 0 0 80px rgba(255, 99, 132, 0.6); }
+  100% { box-shadow: 0 0 10px rgba(255, 99, 132, 0.8); }
+}
+.wheel.glow {
+  animation: wheelGlow 2s ease-in-out infinite;
+}
+/* 一等奖时转盘特殊效果 */
+.wheel.pink-glow {
+  animation: shine 1.5s ease-in-out infinite;
+}
+
+
+/* 清除按钮容器 */
+.reset-btn {
+  position: relative;
+  margin-top: 20px;
+  width: 100px;
+  height: 100px;
+  border: none;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,.2);
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform .2s;
+}
+.reset-btn:active {
+  transform: scale(.95);
+}
+
+/* 环形进度条 */
+.progress-ring {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.progress-ring__circle {
+  fill: transparent;
+  stroke: #e74c3c;
+  stroke-width: 8;
+  stroke-dasharray: 283;   /* 2πr ≈ 2*3.1416*45 */
+  stroke-dashoffset: 283;  /* 初始隐藏 */
+  transition: stroke-dashoffset .1s linear;
+}
+
+.progress-text {
+  font-size: 18px;
+  font-weight: bold;
+  fill: #e74c3c;
+  transform: rotate(90deg);
+  transform-origin: center;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: .5;
+}
+
+.probability-display {
+  position: fixed;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 20px;
+  font-weight: bold;
+  color: #e74c3c;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+}
+
+#first-prize-probability {
+  transition: all 0.5s ease;
+  display: inline-block;
+  min-width: 60px;
+  text-align: center;
+}
+
+#first-prize-probability.changing {
+  transform: scale(1.5);
+  color: #9966FF;
+}
+
+.refresh-prob-btn {
+  position: relative;
+  margin-top: 20px;
+  width: 120px;
+  height: 120px;
+  border: none;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,.2);
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform .2s;
+}
+
+.refresh-prob-btn:active {
+  transform: scale(.95);
+}
+
+.refresh-progress-ring {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.refresh-progress-ring__circle {
+  fill: transparent;
+  stroke: #9966FF;
+  stroke-width: 8;
+  stroke-dasharray: 283;   /* 2πr ≈ 2*3.1416*45 */
+  stroke-dashoffset: 283;  /* 初始隐藏 */
+  transition: stroke-dashoffset .1s linear;
+}
+
+.refresh-progress-text {
+  font-size: 16px;
+  font-weight: bold;
+  fill: #9966FF;
+  transform: rotate(90deg);
+  transform-origin: center;
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>母猪寸寸乐</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="result-banner" class="result-banner">
+        <span id="result-text"></span>
+        <button id="close-btn" class="close-btn">×</button>
+    </div>
+    
+    <!-- 新增：一等奖特效容器 -->
+    <div id="special-effect" class="special-effect"></div>
+    <div class="probability-display">
+  下次转转乐有机会高潮概率: <span id="first-prize-probability">000%</span>
+    </div>
+    <div class="container">
+        <div class="wheel-container">
+            <div id="wheel" class="wheel"></div>
+            <div class="pointer"></div>
+        </div>
+          <!-- 新增：抽奖按钮 -->
+        <button id="spin-btn" class="spin-btn">上贡高潮</button>
+        <!-- 在reset-btn附近添加刷新新概率按钮 -->
+        <button id="refresh-prob-btn" class="refresh-prob-btn">
+  <svg class="refresh-progress-ring" viewBox="0 0 100 100">
+    <circle class="refresh-progress-ring__circle" cx="50" cy="50" r="45" />
+    <text x="50" y="55" text-anchor="middle" class="refresh-progress-text">想喷想喷</text>
+  </svg>
+</button>
+          <!-- 新增：清除 -->
+       <button id="reset-btn" class="reset-btn">
+  <svg class="progress-ring" viewBox="0 0 100 100">
+    <circle class="progress-ring__circle" cx="50" cy="50" r="45" />
+    <text x="50" y="55" text-anchor="middle" class="progress-text">我又寸了</text>
+  </svg>
+</button>
+        <!-- 新增：抽奖计数器 -->
+        <div class="counter">剩余寸止次数: <span id="spin-count">0</span></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
