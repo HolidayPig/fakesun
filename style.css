@@ -391,3 +391,44 @@ button:disabled {
     height: 100px;
   }
 }
+
+/* 移除原有的文本旋转 */
+.progress-text, .refresh-progress-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 18px;
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+  pointer-events: none;
+}
+
+.reset-btn .progress-text {
+  color: #e74c3c;
+}
+
+.refresh-prob-btn .refresh-progress-text {
+  color: #9966FF;
+}
+
+/* 确保按钮有相对定位 */
+.reset-btn, .refresh-prob-btn {
+  position: relative;
+}
+
+/* 媒体查询优化小屏幕 */
+@media (max-width: 480px) {
+  .progress-text, .refresh-progress-text {
+    font-size: 14px;
+    padding: 0 5px;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 320px) {
+  .progress-text, .refresh-progress-text {
+    font-size: 12px;
+  }
+}
