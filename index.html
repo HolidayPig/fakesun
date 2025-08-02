@@ -3,43 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>母猪寸寸乐</title>
+    <title>寸止母猪诱捕器</title>
+    <!-- 引入Font Awesome图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- 引入自定义样式 -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="result-banner" class="result-banner">
-        <span id="result-text"></span>
-        <button id="close-btn" class="close-btn">×</button>
-    </div>
-    
-    <!-- 新增：一等奖特效容器 -->
-    <div id="special-effect" class="special-effect"></div>
-    <div class="probability-display">
-  下次转转乐有机会高潮概率: <span id="first-prize-probability">000%</span>
-    </div>
-    <div class="container">
-        <div class="wheel-container">
-            <div id="wheel" class="wheel"></div>
-            <div class="pointer"></div>
+    <div class="game-container">
+        <!-- 游戏标题 -->
+        <header>
+            <h1><i class="fa fa-gamepad"></i>母猪寸寸乐</h1>
+            <p>靠实力赢得高潮或者被寸烂！</p>
+              <div class="stat-item">
+                    <span class="stat-label">当前回合:</span>
+                    <span class="stat-value" id="roundCount">1</span>
+                </div>
+        </header>
+        
+        <!-- 游戏区域 -->
+        <main>
+        <!-- NPC区域（修改后） -->
+<div class="player-area npc-area">
+    <h2>巨根正太</h2>
+    <!-- NPC技能进度条容器 -->
+    <div class="npc-skills">
+        <div class="skill-bar-container">
+            <div class="skill-bar" id="npcSpadeSkillBar"></div>
+            <div class="skill-label">爆耍(10)</div>
         </div>
-          <!-- 新增：抽奖按钮 -->
-        <button id="spin-btn" class="spin-btn">上贡高潮</button>
-        <!-- 在reset-btn附近添加刷新新概率按钮 -->
-    <button id="refresh-prob-btn" class="refresh-prob-btn">
-  <svg class="refresh-progress-ring" viewBox="0 0 100 100">
-    <circle class="refresh-progress-ring__circle" cx="50" cy="50" r="45" />
-  </svg>
-  <span class="btn-label">想喷</span>
-</button>
-<button id="reset-btn" class="reset-btn">
-  <svg class="progress-ring" viewBox="0 0 100 100">
-    <circle class="progress-ring__circle" cx="50" cy="50" r="45" />
-  </svg>
-  <span class="btn-label">寸了</span>
-</button>
-        <!-- 新增：抽奖计数器 -->
-        <div class="counter">剩余寸止次数: <span id="spin-count">0</span></div>
+        <div class="skill-bar-container">
+            <div class="skill-bar" id="npcHeartSkillBar"></div>
+            <div class="skill-label">射精 (3)</div>
+        </div>
     </div>
+    <div class="card-slot" id="npcCardSlot">
+        <div class="card back" id="npcCard">
+            <span class="card-value">?</span>
+        </div>
+    </div>
+    <div class="status" id="npcStatus">等待中</div>
+</div>
+
+            
+            <!-- 牌堆区域 -->
+            <div class="deck-area">
+                <div class="deck" id="deck">
+                    <span class="card-count" id="cardCount">19</span>
+                </div>
+                <p>剩余牌数: <span id="remainingCards">19</span></p>
+            </div>
+            
+           <!-- 玩家区域（修改后） -->
+<div class="player-area user-area">
+    <h2>寸止母猪</h2>
+    <!-- 玩家能量条 -->
+    <div class="player-energy">
+        <div class="energy-bar-container">
+            <div class="energy-bar" id="playerEnergyBar"></div>
+            <div class="energy-label">快感值(3)</div>
+        </div>
+        <button id="fillEnergyBtn" class="action-btn energy-btn">
+            <i class="fa fa-bolt"></i> 祈求高潮
+        </button>
+    </div>
+    <div class="card-slot" id="playerCardSlot">
+        <div class="card back" id="playerCard">
+            <span class="card-value">?</span>
+        </div>
+    </div>
+    <div class="status" id="playerStatus">等待中</div>
+</div>
+        </main>
+        
+        <!-- 游戏控制区域 -->
+        <div class="controls">
+            <div class="game-message" id="gameMessage">游戏即将开始，正在决定先手...</div>
+            
+            <div class="action-buttons" id="actionButtons">
+                <button id="keepBtn" class="action-btn keep-btn">
+                    <i class="fa fa-hand-paper-o"></i> 保留
+                </button>
+                <button id="giveBtn" class="action-btn give-btn">
+                    <i class="fa fa-share-alt"></i> 上贡
+                </button>
+            </div>
+            
+            <!--  <button id="restartBtn" class="restart-btn">
+                <i class="fa fa-refresh"></i> 重新开始
+            </button> -->
+        </div>
+        
+    
+    <!-- 统计信息 -->
+        <div class="stats">
+            <h3>统计数据</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-label">剩余寸止次数:</span>
+                    <span class="stat-value" id="playerSpadeCount">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">正太注意力:</span>
+                    <span class="stat-value" id="npcSpadeCount">0</span>
+                </div>
+              
+                <div class="stat-item">
+                    <span class="stat-label">母猪快感值:</span>
+                    <span class="stat-value" id="playerHeartCount">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">正太射精值:</span>
+                    <span class="stat-value" id="npcHeartCount">0</span>
+                </div>
+            </div>
+            <div class="wheel-wrapper">
+  <!-- 左侧说明区域 -->
+  <div class="wheel-instructions">
+    <h4>奖励说明</h4>
+    <ul>
+      <li>
+        <span class="color-box red"></span>
+        <span>10% 概率：母猪+1寸止次数</span>
+      </li>
+      <li>
+        <span class="color-box green"></span>
+        <span>40% 概率：母猪+2寸止次数</span>
+      </li>
+      <li>
+        <span class="color-box blue"></span>
+        <span>40% 概率：正太-1注意力</span>
+      </li>
+      <li>
+        <span class="color-box gold"></span>
+        <span>5% 概率：母猪+3快感值</span>
+      </li>
+      <li>
+        <span class="color-box black"></span>
+        <span>5% 概率：寸止次数翻倍</span>
+      </li>
+    </ul>
+  </div>
+
+          <!-- 转盘容器 -->
+            <div class="wheel-container">
+             <div class="wheel" id="prizeWheel">
+  <div class="wheel-section"></div>
+  <div class="wheel-section"></div>
+  <div class="wheel-section"></div>
+  <div class="wheel-section"></div>
+  <div class="wheel-section"></div>
+  <div class="wheel-section"></div>
+  <div class="wheel-section"></div>
+  <div class="wheel-section"></div>
+  <div class="wheel-section"></div>
+  <div class="wheel-section"></div>
+  <div class="wheel-center" id="spinButton">赌</div>
+</div>
+                <div class="wheel-pointer"></div>
+                <p class="wheel-info">消耗1从寸止次数进行抽奖</p>
+            </div>
+        </div>
+        </div>
+        
+        <!-- 游戏结果弹窗 -->
+        <div class="modal" id="resultModal">
+            <div class="modal-content">
+                <h2 id="resultTitle">游戏结果</h2>
+                <p id="resultMessage">结果信息</p>
+                <button id="continueBtn" class="modal-btn">继续游戏</button>
+            </div>
+        </div>
+    </div>
+
+<!-- 添加游戏结束统计模态框 -->
+<div class="modal" id="gameOverModal">
+    <div class="modal-content">
+        <h2>游戏结束</h2>
+        <div class="game-stats">
+            <p>总回合数: <span id="totalRounds">0</span></p>
+            <p>母猪快感总数: <span id="finalPlayerHearts">0</span></p>
+            <p>正太射精总数: <span id="finalNpcHearts">0</span></p>
+            <p>最终胜负: <span id="finalResult"></span></p>
+        </div>
+        <button id="restartGameBtn" class="modal-btn">重新开始</button>
+    </div>
+</div>
+    <!-- 引入游戏脚本 -->
     <script src="script.js"></script>
 </body>
 </html>
+    
