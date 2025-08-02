@@ -54,11 +54,27 @@ main {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    gap: 20px;
-    padding: 20px;
+    gap: 10px; /* 减小间距 */
+    padding: 15px 5px; /* 减小内边距 */
     background-color: #4a5568;
     border-radius: 10px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap; /* 禁止换行 */
+    overflow-x: auto; /* 允许水平滚动（必要时） */
+    min-height: 300px; /* 确保有足够高度容纳内容 */
+}
+@media (max-width: 600px) {
+    main {
+        padding: 10px 5px;
+        gap: 5px;
+    }
+    
+    .player-area {
+        min-width: 120px; /* 减小最小宽度 */
+    }
+    
+    .deck-area {
+        min-width: 80px; /* 减小牌堆区域宽度 */
+    }
 }
 
 /* 玩家区域 */
