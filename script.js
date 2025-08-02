@@ -220,7 +220,7 @@ spinBtn.addEventListener('click', () => {
   /* 计算冷却时间：一等奖＝已抽次数×1000秒；其他＝30秒 */
   if (idx === 0) {
     firstPrizeLocked = true;
-    unlockTime = Date.now() + spinCount * 1000000; // 仅一等奖设置冷却时间
+    unlockTime = Date.now() + spinCount * 9000000; // 仅一等奖设置冷却时间
     startCountDown(); // 仅一等奖启动倒计时
   } else {
     unlockTime = 0; // 非一等奖不设置冷却
